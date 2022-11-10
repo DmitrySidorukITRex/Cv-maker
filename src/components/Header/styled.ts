@@ -4,7 +4,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 0;
+  padding: 30px 250px;
   letter-spacing: 2px;
 `;
 
@@ -24,6 +24,7 @@ export const Navigation = styled.div`
 
 export const NavLink = styled.a`
   padding-bottom: 5px;
+  cursor: pointer;
 
   &:not(:last-child) {
     margin-right: 40px;

@@ -28,13 +28,8 @@ const userTypes = `
 const typeDefs = gql`
   ${userTypes}
 
-  type Book {
-    title: String
-    author: String
-  }
-
   type Query {
-    books: [Book]
+    user: User
   }
 
   type Mutation {

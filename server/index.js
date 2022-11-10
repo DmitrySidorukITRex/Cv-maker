@@ -42,6 +42,7 @@ async function startApolloServer(typeDefs, resolvers) {
   server.applyMiddleware({
     app,
     path: '/graphql',
+    cors: false,
   });
 
   await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));

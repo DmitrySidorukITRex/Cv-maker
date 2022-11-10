@@ -1,12 +1,9 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import HomePageLayout from '../layouts/HomePageLayout';
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <div>Hello Home Page</div>
-    </>
-  );
+  return <HomePageLayout />;
 };
 
 export default Home;

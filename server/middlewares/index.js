@@ -1,4 +1,5 @@
 const session = require('express-session');
+const cors = require('cors');
 const config = require('../config/dev');
 const passport = require('passport');
 
@@ -16,6 +17,12 @@ exports.init = (server, db) => {
     store: db.initSessionStore(),
   };
 
+  const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+  };
+
+  server.use(cors(corsOptions));
   server.use(session(sess));
   server.use(passport.initialize());
   server.use(passport.session());

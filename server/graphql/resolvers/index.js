@@ -1,13 +1,8 @@
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
+const userQueries = {
+  user: (root, { id }, ctx) => {
+    return ctx.models.User.getAuthUser(ctx);
   },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
+};
 
 const userMutations = {
   signUp: async (root, { input }, ctx) => {
@@ -24,7 +19,7 @@ const userMutations = {
 
 const resolvers = {
   Query: {
-    books: () => books,
+    ...userQueries,
   },
   Mutation: {
     ...userMutations,

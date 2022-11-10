@@ -1,6 +1,8 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient } from '@apollo/client';
+import { cache } from './src/apollo/cache';
 
 export const apolloClient = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: cache,
   uri: process.env.serverURI,
+  credentials: 'include',
 });
