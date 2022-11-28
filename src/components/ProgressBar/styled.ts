@@ -47,5 +47,3 @@ export const Item = styled.div<ItemProps>`
     z-index: 0;
   }
 `;
-
-// export const Title = styled.div``;

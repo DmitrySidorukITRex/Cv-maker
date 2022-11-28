@@ -1,23 +1,23 @@
 import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { EducationDetailsModel } from '../../interfaces/shared.interface';
+import { WorkDetailsModel } from '../../interfaces/shared.interface';
 import Select from '../Select';
 import { MonthSelect, YearSelect } from './constants';
 import * as Styled from './styled';
 
-interface EducationDetailsFormProps {
-  educationDetails: EducationDetailsModel | {};
+interface WorkDetailsFormProps {
+  workDetails: WorkDetailsModel | {};
   onCancel: () => void;
-  onSave: SubmitHandler<EducationDetailsModel>;
+  onSave: SubmitHandler<WorkDetailsModel>;
 }
 
-const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
-  educationDetails,
+const WorkDetailsForm: React.FC<WorkDetailsFormProps> = ({
+  workDetails,
   onCancel,
   onSave,
 }) => {
-  const { register, control, handleSubmit } = useForm<EducationDetailsModel>({
-    defaultValues: educationDetails,
+  const { register, control, handleSubmit } = useForm<WorkDetailsModel>({
+    defaultValues: workDetails,
   });
 
   const monthSelect = MonthSelect;
@@ -27,11 +27,11 @@ const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
     <Styled.Form onSubmit={handleSubmit(onSave)}>
       <Styled.FormRow>
         <Styled.FormGroup>
-          <Styled.FormLabel htmlFor="degree">Degree</Styled.FormLabel>
+          <Styled.FormLabel htmlFor="jobTitle">Job title</Styled.FormLabel>
           <Styled.FormControlInput
-            {...register('degree')}
+            {...register('jobTitle')}
             type="text"
-            id="degree"
+            id="jobTitle"
             autoComplete="disabled"
           />
         </Styled.FormGroup>
@@ -46,11 +46,11 @@ const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
         </Styled.FormGroup>
       </Styled.FormRow>
       <Styled.FormGroup>
-        <Styled.FormLabel htmlFor="school">School</Styled.FormLabel>
+        <Styled.FormLabel htmlFor="employer">Employer</Styled.FormLabel>
         <Styled.FormControlInput
-          {...register('school')}
+          {...register('employer')}
           type="text"
-          id="school"
+          id="employer"
           autoComplete="disabled"
         />
       </Styled.FormGroup>
@@ -86,7 +86,7 @@ const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
         </Styled.FormGroup>
       </Styled.FormRow>
       <Styled.FormRow>
-        <Styled.FormGroup>Graduation date</Styled.FormGroup>
+        <Styled.FormGroup>End date</Styled.FormGroup>
         <Styled.FormGroup>
           <Controller
             name="endDateMonth"
@@ -117,9 +117,9 @@ const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
         </Styled.FormGroup>
       </Styled.FormRow>
       <Styled.FormGroup>
-        <Styled.FormLabel htmlFor="details">Details</Styled.FormLabel>
+        <Styled.FormLabel htmlFor="details">Responsibilities</Styled.FormLabel>
         <Styled.FormControlTextArea
-          {...register('details')}
+          {...register('responsibilities')}
           rows={5}
           id="details"
           autoComplete="disabled"
@@ -134,4 +134,4 @@ const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
   );
 };
 
-export default EducationDetailsForm;
+export default WorkDetailsForm;

@@ -18,10 +18,10 @@ const PersonalDetailsLayout: React.FC<PersonalDetailsLayoutProps> = ({
   onCancel,
 }) => {
   return (
-    <Styled.Layout>
+    <LayoutStyled.Layout>
       <Styled.SubHeadline>Let&apos;s start with</Styled.SubHeadline>
       <Styled.Headline>Contact Information</Styled.Headline>
-      <Styled.Content>
+      <LayoutStyled.Content>
         <PersonalDetailsForm
           personalDetails={personalDetails}
           onChange={onChange}
@@ -34,8 +34,8 @@ const PersonalDetailsLayout: React.FC<PersonalDetailsLayoutProps> = ({
             Save &#38; next
           </LayoutStyled.SubmitButton>
         </LayoutStyled.FormActions>
-      </Styled.Content>
-    </Styled.Layout>
+      </LayoutStyled.Content>
+    </LayoutStyled.Layout>
   );
 };
 

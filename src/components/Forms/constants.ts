@@ -1,7 +1,7 @@
 import { MONTHS, YEARS } from '../../appConstants';
 import { SelectModel } from '../../interfaces/shared.interface';
 
-export const GraduationMonthsSelect: SelectModel = {
+export const MonthSelect: SelectModel = {
   items: [
     { name: 'Month', value: '' },
     ...Object.values(MONTHS).map((value) => ({
@@ -11,7 +11,7 @@ export const GraduationMonthsSelect: SelectModel = {
   ],
 };
 
-export const GraduationYearsSelect: SelectModel = {
+export const YearSelect: SelectModel = {
   items: [
     { name: 'Year', value: '' },
     ...Object.values(YEARS)

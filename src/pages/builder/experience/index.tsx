@@ -1,26 +1,23 @@
+import { useReactiveVar } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Builder from '..';
-import { experienceDetailsVar, progressBarVar } from '../../../apollo/cache';
-import { URL } from '../../../appConstants';
+import { experienceSectionsVar, progressBarVar } from '../../../apollo/cache';
 import {
-  AccordionModel,
-  EducationDetailsModel,
-} from '../../../interfaces/shared.interface';
+  ExperienceChangingPosition,
+  ExperienceSectionsName,
+  URL,
+} from '../../../appConstants';
+import ExperienceHeader from '../../../components/ExperienceHeader';
+import { AccordionModel } from '../../../interfaces/shared.interface';
+import EducationExperienceLayout from '../../../layouts/EducationExperienceLayout';
 import ExperianceLayout from '../../../layouts/ExperianceLayout';
+import WorkExperienceLayout from '../../../layouts/WorkExperienceLayout';
 import { NextPageWithLayout } from '../../_app';
 
 const Experience: NextPageWithLayout = () => {
   const router = useRouter();
   const progressBarItems = progressBarVar();
-  const experienceDetails = experienceDetailsVar();
-
-  const experienceItems: AccordionModel[] = [
-    { title: 'Education and Qualifications' },
-  ];
-
-  const onChangeEducationDetails = (data: EducationDetailsModel) => {
-    experienceDetailsVar({ ...experienceDetails, education: data });
-  };
+  const experienceSections = useReactiveVar(experienceSectionsVar);
 
   const onCancel = () => {
     router.push(URL.BUILDER_PERSONAL_DETAILS);
@@ -37,11 +34,71 @@ const Experience: NextPageWithLayout = () => {
     router.push(URL.BUILDER_TEMPLATE);
   };
 
+  const onChangeExperiencePosition = (
+    position: string,
+    title: ExperienceSectionsName
+  ) => {
+    const index = experienceSections.indexOf(title);
+    const copy = JSON.parse(JSON.stringify(experienceSections));
+
+    if (position === ExperienceChangingPosition.Down) {
+      if (index !== experienceSections.length) {
+        const item = experienceSections[index];
+        copy.splice(index, 1);
+        copy.splice(index + 1, 0, item);
+      }
+    } else {
+      if (index > 0) {
+        const item = experienceSections[index - 1];
+        copy.splice(index - 1, 1);
+        copy.splice(index, 0, item);
+      }
+    }
+
+    experienceSectionsVar(copy);
+  };
+
+  const educationAccordionModel = {
+    headerEl: (
+      <ExperienceHeader
+        title={ExperienceSectionsName.Education}
+        onChangePosition={onChangeExperiencePosition}
+      />
+    ),
+    contentEl: <EducationExperienceLayout />,
+  };
+
+  const workAccordionModel = {
+    headerEl: (
+      <ExperienceHeader
+        title={ExperienceSectionsName.Work}
+        onChangePosition={onChangeExperiencePosition}
+      />
+    ),
+    contentEl: <WorkExperienceLayout />,
+  };
+
+  const experienceAccordionModels = () => {
+    const items: AccordionModel[] = [];
+    experienceSections.forEach((section) => {
+      switch (section) {
+        case ExperienceSectionsName.Education:
+          items.push(educationAccordionModel);
+          break;
+        case ExperienceSectionsName.Work:
+          items.push(workAccordionModel);
+          break;
+        default:
+          break;
+      }
+    });
+
+    return items;
+  };
+
   return (
     <ExperianceLayout
-      experienceItems={experienceItems}
-      experienceDetails={experienceDetails}
-      onChangeEducationDetails={onChangeEducationDetails}
+      experienceItems={experienceAccordionModels()}
       onCancel={onCancel}
       onSubmit={onSubmit}
     />

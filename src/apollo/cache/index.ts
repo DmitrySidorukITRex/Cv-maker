@@ -1,24 +1,14 @@
 import { InMemoryCache, makeVar } from '@apollo/client';
-import { URL } from '../../appConstants';
+import { ExperienceSectionsName, URL } from '../../appConstants';
 import {
+  EducationExperienceItemModel,
   ExperianceDetailsModel,
   PersonalDetailsModel,
   ProgressBarItem,
+  WorkExperienceItemModel,
 } from '../../interfaces/shared.interface';
 
 export const cache = new InMemoryCache();
-
-// const personalDetailsInitialValue: PersonalDetailsModel = {
-//   firstname: '',
-//   lastname: '',
-//   email: '',
-//   phone: '',
-//   address: '',
-//   city: '',
-//   code: '',
-// };
-
-// const experienceDetailsInitialValue
 
 export const progressBarInitialValue: ProgressBarItem[] = [
   { title: 'Personal', isActive: true, link: URL.BUILDER_PERSONAL_DETAILS },
@@ -33,5 +23,17 @@ export const progressBarVar = makeVar<ProgressBarItem[]>(
 export const personalDetailsVar = makeVar<PersonalDetailsModel | {}>({});
 
 export const experienceDetailsVar = makeVar<ExperianceDetailsModel>({
-  education: {},
+  education: [],
+  work: [],
 });
+
+export const currentEducationDetailsVar = makeVar<
+  EducationExperienceItemModel | {}
+>({});
+
+export const currentWorkDetailsVar = makeVar<WorkExperienceItemModel | {}>({});
+
+export const experienceSectionsVar = makeVar<ExperienceSectionsName[]>([
+  ExperienceSectionsName.Education,
+  ExperienceSectionsName.Work,
+]);

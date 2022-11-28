@@ -87,3 +87,13 @@ export enum YEARS {
   // '_2029',
   // '_2030',
 }
+
+export enum ExperienceSectionsName {
+  Education = 'Education and Qualifications',
+  Work = 'Work Experience',
+}
+
+export enum ExperienceChangingPosition {
+  Up = 'Up',
+  Down = 'Down',
+}

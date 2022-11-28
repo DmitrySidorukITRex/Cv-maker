@@ -42,6 +42,7 @@ export const List = styled.div`
   overflow: hidden;
   overflow-y: auto;
   border: 1px solid #c7d8e0;
+  z-index: 999;
 `;
 
 export const ListItem = styled.div<ListItemProps>`

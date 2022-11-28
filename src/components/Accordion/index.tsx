@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import * as Styled from './styled';
 
 interface AccordionProps {
-  title: string;
   children: React.ReactNode;
+  headerEl: React.ReactNode;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
+const Accordion: React.FC<AccordionProps> = ({ children, headerEl }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Styled.Wrapper>
       <Styled.Header onClick={() => setIsOpen((state) => !state)}>
-        {title}
+        {headerEl}
       </Styled.Header>
       {isOpen && <Styled.Content>{children}</Styled.Content>}
     </Styled.Wrapper>

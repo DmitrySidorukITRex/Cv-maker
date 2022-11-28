@@ -15,19 +15,22 @@ const Builder: React.FC<BuilderProps> = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
+    const currentProgressBarItems = progressBarVar().map((x) => {
+      x.isActive = x.link === router.pathname;
+
+      return x;
+    });
+
+    progressBarVar(currentProgressBarItems);
+  }, [router.pathname]);
+
+  useEffect(() => {
     return () => {
       progressBarVar(JSON.parse(JSON.stringify(progressBarInitialValue)));
     };
   }, []);
 
   const onNavigate = (item: ProgressBarItem) => {
-    const currentProgressBarItems = progressBarVar().map((x) => {
-      x.isActive = x === item;
-
-      return x;
-    });
-
-    progressBarVar(currentProgressBarItems);
     router.push(item.link);
   };
 

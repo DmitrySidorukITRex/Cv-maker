@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Layout = styled.div`
+  width: 100%;
+  background-color: #fff;
+  color: #023642;
+  padding: 40px 120px;
+  letter-spacing: 0.7px;
+`;
+
 export const Headline = styled.h1`
   margin-top: 0;
   line-height: 38px;
@@ -39,5 +47,21 @@ export const CancelButton = styled.button`
 export const FormActions = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+`;
+
+export const Content = styled.div`
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px 0;
+`;
+
+export const AddExperienceItemButton = styled.button`
+  width: 100%;
+  border: none;
+  padding: 15px 0;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
 `;

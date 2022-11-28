@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface ProgressBarItem {
   title: string;
   isActive: boolean;
@@ -18,17 +20,40 @@ export interface EducationDetailsModel {
   degree: string;
   city: string;
   school: string;
-  graduationMonth: string;
-  graduationYear: string;
+  startDateMonth: string;
+  startDateYear: string;
+  endDateMonth: string;
+  endDateYear: string;
   details: string;
 }
 
+export interface EducationExperienceItemModel extends EducationDetailsModel {
+  id: string;
+}
+
+export interface WorkDetailsModel {
+  jobTitle: string;
+  city: string;
+  employer: string;
+  startDateMonth: string;
+  startDateYear: string;
+  endDateMonth: string;
+  endDateYear: string;
+  responsibilities: string;
+}
+
+export interface WorkExperienceItemModel extends WorkDetailsModel {
+  id: string;
+}
+
 export interface ExperianceDetailsModel {
-  education: EducationDetailsModel | {};
+  work: WorkExperienceItemModel[] | [];
+  education: EducationExperienceItemModel[] | [];
 }
 
 export interface AccordionModel {
-  title: string;
+  headerEl: React.ReactNode;
+  contentEl: React.ReactNode;
 }
 
 export interface SelectModel {
@@ -38,4 +63,13 @@ export interface SelectModel {
 export interface SelectItem {
   name: string;
   value: string;
+}
+
+export interface ExperienceItemModel {
+  id: string;
+  title: string;
+  startDateMonth: string;
+  startDateYear: string;
+  endDateMonth: string;
+  endDateYear: string;
 }
