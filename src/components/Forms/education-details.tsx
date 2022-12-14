@@ -6,7 +6,7 @@ import { MonthSelect, YearSelect } from './constants';
 import * as Styled from './styled';
 
 interface EducationDetailsFormProps {
-  educationDetails: EducationDetailsModel | {};
+  educationDetails: EducationDetailsModel | null;
   onCancel: () => void;
   onSave: SubmitHandler<EducationDetailsModel>;
 }
@@ -17,7 +17,7 @@ const EducationDetailsForm: React.FC<EducationDetailsFormProps> = ({
   onSave,
 }) => {
   const { register, control, handleSubmit } = useForm<EducationDetailsModel>({
-    defaultValues: educationDetails,
+    defaultValues: educationDetails || {},
   });
 
   const monthSelect = MonthSelect;

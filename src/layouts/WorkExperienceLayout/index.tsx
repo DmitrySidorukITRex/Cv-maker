@@ -16,41 +16,44 @@ import * as Styled from './styled';
 
 const WorkExperienceLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const experienceDetails = experienceDetailsVar();
+  const experienceDetails = useReactiveVar(experienceDetailsVar);
   const currentWorkDetails = useReactiveVar(currentWorkDetailsVar);
 
   const onCancel = () => {
     setIsOpen(false);
   };
 
-  const onSave = (data: WorkDetailsModel) => {
-    saveWorkExperience(data);
+  const onSave = (data: WorkDetailsModel | WorkExperienceItemModel) => {
+    if (currentWorkDetails) {
+      editWorkExperienceItem(data as WorkExperienceItemModel);
+    } else {
+      saveWorkExperience(data as WorkDetailsModel);
+    }
+
     setIsOpen(false);
+    currentWorkDetailsVar(null);
   };
 
-  const onEditWorkExperienceItem = (item: ExperienceItemModel) => {
-    editWorkExperienceItem(item);
+  const onEditWorkExperienceItem = (data: ExperienceItemModel) => {
+    const currentItem = experienceDetails.work.find((x) => x.id === data.id);
+    currentWorkDetailsVar(currentItem);
+
     setIsOpen(true);
   };
 
   const saveWorkExperience = (data: WorkDetailsModel) => {
-    const currentWorkExperienceItems = experienceDetails.work.filter(
-      (x) => x.id !== (currentWorkDetails as WorkExperienceItemModel).id
-    );
     const newWorkExperienceItem = {
       ...data,
       id: Math.random().toString().slice(2),
     };
     experienceDetailsVar({
       ...experienceDetails,
-      work: [...currentWorkExperienceItems, newWorkExperienceItem],
+      work: [...experienceDetails.work, newWorkExperienceItem],
     });
-    currentWorkDetailsVar({});
   };
 
   const removeWorkExperienceItem = (data: ExperienceItemModel) => {
-    const id =
-      data.id ?? (currentWorkDetailsVar() as WorkExperienceItemModel).id;
+    const id = data.id ?? (currentWorkDetails as WorkExperienceItemModel).id;
     const workExperienceItems = experienceDetails.work.filter(
       (item) => item.id !== id
     );
@@ -61,9 +64,16 @@ const WorkExperienceLayout = () => {
     });
   };
 
-  const editWorkExperienceItem = (data: ExperienceItemModel) => {
-    const currentItem = experienceDetails.work.find((x) => x.id === data.id);
-    currentWorkDetailsVar(currentItem);
+  const editWorkExperienceItem = (data: WorkExperienceItemModel) => {
+    const copy = [...experienceDetails.work];
+    const currentItemIndex = copy.findIndex((x) => x.id === data.id);
+
+    copy[currentItemIndex] = data;
+
+    experienceDetailsVar({
+      ...experienceDetails,
+      work: [...copy],
+    });
   };
 
   const getExperienceItem = (

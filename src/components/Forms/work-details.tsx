@@ -6,7 +6,7 @@ import { MonthSelect, YearSelect } from './constants';
 import * as Styled from './styled';
 
 interface WorkDetailsFormProps {
-  workDetails: WorkDetailsModel | {};
+  workDetails: WorkDetailsModel | null;
   onCancel: () => void;
   onSave: SubmitHandler<WorkDetailsModel>;
 }
@@ -17,7 +17,7 @@ const WorkDetailsForm: React.FC<WorkDetailsFormProps> = ({
   onSave,
 }) => {
   const { register, control, handleSubmit } = useForm<WorkDetailsModel>({
-    defaultValues: workDetails,
+    defaultValues: workDetails || {},
   });
 
   const monthSelect = MonthSelect;

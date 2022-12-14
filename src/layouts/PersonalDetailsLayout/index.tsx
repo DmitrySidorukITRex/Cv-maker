@@ -20,7 +20,7 @@ const PersonalDetailsLayout: React.FC<PersonalDetailsLayoutProps> = ({
   return (
     <LayoutStyled.Layout>
       <Styled.SubHeadline>Let&apos;s start with</Styled.SubHeadline>
-      <Styled.Headline>Contact Information</Styled.Headline>
+      <LayoutStyled.Headline>Contact Information</LayoutStyled.Headline>
       <LayoutStyled.Content>
         <PersonalDetailsForm
           personalDetails={personalDetails}

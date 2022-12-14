@@ -16,36 +16,43 @@ import * as Styled from './styled';
 
 const EducationExperienceLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const experienceDetails = experienceDetailsVar();
+  const experienceDetails = useReactiveVar(experienceDetailsVar);
   const currentDetails = useReactiveVar(currentEducationDetailsVar);
 
   const onCancel = () => {
     setIsOpen(false);
   };
 
-  const onSave = (data: EducationDetailsModel) => {
-    saveExperience(data);
+  const onSave = (
+    data: EducationDetailsModel | EducationExperienceItemModel
+  ) => {
+    if (currentDetails) {
+      editExperienceItem(data as EducationExperienceItemModel);
+    } else {
+      saveExperience(data as EducationDetailsModel);
+    }
+
     setIsOpen(false);
+    currentEducationDetailsVar(null);
   };
 
-  const onEditExperienceItem = (item: ExperienceItemModel) => {
-    editExperienceItem(item);
+  const onEditExperienceItem = (data: ExperienceItemModel) => {
+    const currentItem = experienceDetails.education.find(
+      (x) => x.id === data.id
+    );
+    currentEducationDetailsVar(currentItem);
     setIsOpen(true);
   };
 
   const saveExperience = (data: EducationDetailsModel) => {
-    const currentExperienceItems = experienceDetails.education.filter(
-      (x) => x.id !== (currentDetails as EducationExperienceItemModel).id
-    );
     const newExperienceItem = {
       ...data,
       id: Math.random().toString().slice(2),
     };
     experienceDetailsVar({
       ...experienceDetails,
-      education: [...currentExperienceItems, newExperienceItem],
+      education: [...experienceDetails.education, newExperienceItem],
     });
-    currentEducationDetailsVar({});
   };
 
   const removeExperienceItem = (data: ExperienceItemModel) => {
@@ -56,15 +63,20 @@ const EducationExperienceLayout = () => {
 
     experienceDetailsVar({
       ...experienceDetails,
-      education: experienceItems,
+      education: [...experienceItems],
     });
   };
 
-  const editExperienceItem = (data: ExperienceItemModel) => {
-    const currentItem = experienceDetails.education.find(
-      (x) => x.id === data.id
-    );
-    currentEducationDetailsVar(currentItem);
+  const editExperienceItem = (data: EducationExperienceItemModel) => {
+    const copy = [...experienceDetails.education];
+    const currentItemIndex = copy.findIndex((x) => x.id === data.id);
+
+    copy[currentItemIndex] = data;
+
+    experienceDetailsVar({
+      ...experienceDetails,
+      education: [...copy],
+    });
   };
 
   const getExperienceItem = (

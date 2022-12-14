@@ -27,11 +27,12 @@ export const experienceDetailsVar = makeVar<ExperianceDetailsModel>({
   work: [],
 });
 
-export const currentEducationDetailsVar = makeVar<
-  EducationExperienceItemModel | {}
->({});
+export const currentEducationDetailsVar =
+  makeVar<EducationExperienceItemModel | null>(null);
 
-export const currentWorkDetailsVar = makeVar<WorkExperienceItemModel | {}>({});
+export const currentWorkDetailsVar = makeVar<WorkExperienceItemModel | null>(
+  null
+);
 
 export const experienceSectionsVar = makeVar<ExperienceSectionsName[]>([
   ExperienceSectionsName.Education,

@@ -12,6 +12,7 @@ export const ItemInfo = styled.div``;
 
 export const ItemTitle = styled.div`
   font-weight: 700;
+  margin-bottom: 5px;
 `;
 
 export const ItemSubtitle = styled.div`

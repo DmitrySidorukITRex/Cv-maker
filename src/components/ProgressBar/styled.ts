@@ -7,7 +7,6 @@ interface ItemProps {
 
 export const Wrapper = styled.div`
   display: flex;
-  flex-directon: column;
 `;
 
 export const Item = styled.div<ItemProps>`

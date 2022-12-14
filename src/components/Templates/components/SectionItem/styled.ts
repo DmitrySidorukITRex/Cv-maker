@@ -9,6 +9,7 @@ export const SectionItemHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 8px;
 `;
 
 export const SectionHeaderDate = styled.div`
@@ -17,7 +18,7 @@ export const SectionHeaderDate = styled.div`
 
 export const SectionHeaderTitle = styled.h3`
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 `;
 
 export const SectionItemSubtitle = styled.div`

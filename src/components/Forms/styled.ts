@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const Form = styled.form`
   width: 100%;
-  margin-top: 40px;
 `;
 
 export const FormGroup = styled.div`
@@ -32,7 +31,7 @@ const inputBaseCss = css`
 
 export const FormControlInput = styled.input`
   ${inputBaseCss};
-  height: 38px;
+  height: 48px;
 `;
 
 export const FormControlTextArea = styled.textarea`
